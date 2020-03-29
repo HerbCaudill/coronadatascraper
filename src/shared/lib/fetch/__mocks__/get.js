@@ -1,5 +1,5 @@
 ﻿/* eslint-disable import/prefer-default-export */
-import sanitizeUrl from './sanitize-url.js';
+import sanitizeUrl from '../../sanitize-url.js';
 
 /**
  * This function mocks the `get` function for testing. To use it, first pass an object of sources to
@@ -29,7 +29,8 @@ const mockGet = async url => {
   const urlKey = sanitizeUrl(url);
   const sourceKey = keys.find(key => key.startsWith(urlKey));
   if (sourceKey === undefined) {
-    return undefined;
+    // console.log({ url, keys, sourceKey });
+    throw new Error(`You need to provide a mock source for ${url} . The file should be called ${urlKey}`);
   }
   return mockGet.sources[sourceKey];
 };
